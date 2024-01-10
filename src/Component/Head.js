@@ -48,15 +48,45 @@ function Head() {
       setNav(true);
     }
   }, [location]);
+
+  const [isNavOpen, setNavOpen] = useState(false);
+  function toggleNav() {
+    setNavOpen(!isNavOpen);
+  }
   return (
     <div>
-      <div className="flex justify-between items-center bg-white px-12 shadow-xl fixed w-full top-0 z-10">
-        <Link to="/body">
-          <img alt="logo" src={image} className=" w-28 p-2"></img>
-        </Link>
+      <div className="flex justify-between items-center bg-white px-12 shadow-xl fixed w-full top-0 z-10 flex-col md:flex-row">
+        <div className="flex justify-between items-center space-x-4">
+          <div>
+            <Link to="/body">
+              <img alt="logo" src={image} className="w-28 p-2" />
+            </Link>
+          </div>
+
+          {isNavOpen ? (
+            <div
+              className="md:hidden font-bold text-3xl flex justify-end items-end"
+              onClick={toggleNav}
+            >
+              X
+            </div>
+          ) : (
+            <div
+              className="md:hidden font-bold text-3xl flex justify-end items-end"
+              onClick={toggleNav}
+            >
+              ☰
+            </div>
+          )}
+        </div>
+
         <div>
           {nav && (
-            <ul className="flex gap-8 font-medium">
+            <ul
+              className={`gap-8 font-medium  block md:flex ${
+                isNavOpen ? "block" : "hidden"
+              }`}
+            >
               <Link to="/Body">
                 <li className="text-xl hover:border-b-2 border-b border-transparent hover:border-red-500">
                   Home
@@ -84,7 +114,11 @@ function Head() {
 
         <userContext.Provider value={{ name: use }}>
           {nav && (
-            <div className="flex items-center">
+            <div
+              className={`flex items-center md:flex ${
+                isNavOpen ? "block" : "hidden"
+              }`}
+            >
               <FaUser className="m-2" />
               <p className="text-lg">{use}</p>
             </div>
@@ -95,7 +129,9 @@ function Head() {
           {nav && (
             <Link to="/">
               <button
-                className="bg-red-500 text-white p-1 m-2 rounded-lg w-20"
+                className={`bg-red-500 text-white p-1 m-2 rounded-lg w-20  md:block ${
+                  isNavOpen ? "block" : "hidden"
+                }`}
                 onClick={SignoutHandler}
               >
                 Logout

@@ -68,16 +68,16 @@ const LogIn = () => {
   ) : (
     <div className=" flex justify-center items-center h-screen flex-col banner">
       <img src={logo} alt="logo" className=" w-44 m-4"></img>
-      <div className="w-[25%]">
-        <div className="bg-white p-8 rounded-lg shadow-md border-[2px]">
+      <div class="w-full md:w-[60%] lg:w-[25%] mx-auto">
+        <div class="bg-white p-8 rounded-lg shadow-md border-2 ">
           {isSignInForm ? (
-            <h1 className="text-2xl font-bold mb-4">Sign In</h1>
+            <h1 class="text-2xl font-bold mb-4">Sign In</h1>
           ) : (
-            <h1 className="text-2xl font-bold mb-4">Sign Out</h1>
+            <h1 class="text-2xl font-bold mb-4">Sign Out</h1>
           )}
 
           <form
-            className="flex flex-col space-y-4"
+            class="flex flex-col space-y-4"
             onSubmit={(e) => e.preventDefault()}
           >
             {!isSignInForm && (
@@ -85,7 +85,7 @@ const LogIn = () => {
                 ref={name}
                 type="text"
                 placeholder="Full Name"
-                className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring focus:border-red-500"
+                class="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring focus:border-red-500"
                 required
               />
             )}
@@ -93,7 +93,7 @@ const LogIn = () => {
               ref={email}
               type="email"
               placeholder="Email"
-              className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring focus:border-red-500"
+              class="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring focus:border-red-500"
               required
             />
 
@@ -101,23 +101,21 @@ const LogIn = () => {
               ref={password}
               type="password"
               placeholder="Password"
-              className="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring focus:border-red-500"
+              class="border border-gray-300 rounded-md p-2 focus:outline-none focus:ring focus:border-red-500"
               required
             />
 
             <button
-              className="bg-red-500 text-white rounded-md py-2 px-4 hover:bg-red-600 focus:outline-none focus:ring focus:border-red-500"
+              class="bg-red-500 text-white rounded-md py-2 px-4 hover:bg-red-600 focus:outline-none focus:ring focus:border-red-500"
               onClick={submithandler}
             >
               {isSignInForm ? "Sign In" : "Sign Up"}
             </button>
-            <p className=" text-lg  font-semibold text-red-600 ">
-              {Errormessage}
-            </p>
+            <p class="text-lg font-semibold text-red-600 ">{Errormessage}</p>
           </form>
 
           <p
-            className="mt-4 text-sm text-blue-500 hover:underline"
+            class="mt-4 text-sm text-blue-500 hover:underline"
             onClick={handler}
           >
             {isSignInForm

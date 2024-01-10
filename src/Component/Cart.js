@@ -65,8 +65,8 @@ const Cart = () => {
             <div className=" w-[50%] flex justify-center ">
               <div className=" w-[20%]">
                 <h1>Orders Details</h1>
-                <p>porennfdshf fsdvjf dsh</p>
-                <p>porennfdshf fsdvjf dsh</p>
+                <p>Total Quantity:- {cartItem.length}</p>
+                <p>Discount: - </p>
                 <hr />
                 <p>Total :{cartItem.cartTotalAmount}</p>
               </div>
