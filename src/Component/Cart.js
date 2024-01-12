@@ -63,12 +63,12 @@ const Cart = () => {
               ))}
             </div>
             <div className=" w-[50%] flex justify-center ">
-              <div className=" w-[20%]">
-                <h1>Orders Details</h1>
+              <div className=" w-[35%] mt-20 font-medium ">
+                <h1 className=" text-3xl my-4">Orders Details</h1>
                 <p>Total Quantity:- {cartItem.length}</p>
                 <p>Discount: - </p>
-                <hr />
-                <p>Total :{cartItem.cartTotalAmount}</p>
+                <hr className=" my-4" />
+                <p className=" my-4">Total :{cartItem.cartTotalAmount}</p>
               </div>
             </div>
           </div>
