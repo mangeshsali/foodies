@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ResturantList from "./ResturantList";
 const ResturantCategory = ({ data }) => {
-  console.log(data);
+  // console.log(data);
   const [isVisible, setisVisible] = useState(false);
   function Handler() {
     setisVisible(!isVisible);

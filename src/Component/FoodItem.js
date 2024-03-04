@@ -30,8 +30,8 @@ const FoodItem = ({ name, price, description, defaultPrice, imageId, id }) => {
 
           <div className=" m-2 w-[50%]">
             <div className=" text-start ">
-              <h1 className=" font-medium">{name}</h1>
-              <h2>
+              <h1 className=" font-medium text-lg">{name}</h1>
+              <h2 className=" text-lg">
                 {"₹ "}
                 {price ? price / 100 : defaultPrice / 100}
               </h2>

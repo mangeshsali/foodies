@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+
 const cartSlice = createSlice({
   name: "cart",
   initialState: {
@@ -8,30 +9,33 @@ const cartSlice = createSlice({
   reducers: {
     addItem: (state, action) => {
       state.items.push(action.payload);
+      state.cartTotalAmount += action.payload.card.info.price;
     },
     removeItem: (state, action) => {
-      state.items = state.items.filter(
-        (x) => x.card.info.id !== action.payload.id
+      const removedItem = state.items.find(
+        (item) => item.card.info.id === action.payload.id
       );
+      if (removedItem) {
+        state.items = state.items.filter(
+          (item) => item.card.info.id !== action.payload.id
+        );
+        state.cartTotalAmount -= removedItem.card.info.price;
+      }
     },
     clearItem: (state) => {
       state.items = [];
+      state.cartTotalAmount = 0;
     },
-    getTotalAmount: (state, action) => {
-      let { total, quantity } = state.items.reduce(
-        (acc, curr) => {
-          const { price } = curr;
-          const itemtotal = price;
-
-          acc.totalAmount += itemtotal;
-          return acc;
-        },
-        { tatalAmount: 0 }
+    getTotalAmount(state) {
+      state.cartTotalAmount = state.items.reduce(
+        (total, item) => total + item.card.info.price,
+        0
       );
-      state.cartTotalAmount = total;
     },
-    qualityIncrease: (state, action) => {},
-
+    qualityIncrease: (state, action) => {
+      state.items.push(action.payload);
+      state.cartTotalAmount += action.payload.card.info.price;
+    },
     qualityDecrease: (state, action) => {},
   },
 });
@@ -44,4 +48,5 @@ export const {
   qualityDecrease,
   getTotalAmount,
 } = cartSlice.actions;
+
 export default cartSlice.reducer;
