@@ -1,9 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import FoodItem from "./FoodItem";
 import { clearItem, getTotalAmount } from "../Utils/cartSlice";
-import { useAsyncError, useNavigate } from "react-router-dom";
+import { Link, useAsyncError, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
+import toast from "react-hot-toast";
+import imgLogo from "../Utils/shopping-cart-orange.svg";
 const Cart = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -23,6 +25,12 @@ const Cart = () => {
   useEffect(() => {
     dispatch(getTotalAmount());
   }, [cartItem]);
+
+  function checkOutHandler() {
+    navigate("/Body");
+    toast.success(" 😄 Order place... Enjoy Your Meal");
+    dispatch(clearItem());
+  }
   return (
     <>
       <div className=" min-h-screen">
@@ -37,13 +45,9 @@ const Cart = () => {
           </button>
         </div>
         {cartItem.length === 0 ? (
-          <div className="  w-10/12 bg-gray-100 shadow-xl rounded-xl mx-auto text-2xl  text-center p-8">
+          <div className="  w-10/12 bg-[#f0f8ff] shadow-xl rounded-xl mx-auto text-2xl  text-center p-8">
             <div className="flex justify-center">
-              <img
-                alt="img"
-                src="https://www.clker.com/cliparts/O/N/s/Q/P/Y/shopping-cart-orange.svg"
-                className=" w-56 m-4"
-              ></img>
+              <img alt="img" src={imgLogo} className=" w-56 m-4"></img>
             </div>
             <p className="font-medium m-2">
               Your Cart is <span className=" text-red-500">Empty </span>!
@@ -59,22 +63,25 @@ const Cart = () => {
             </button>
           </div>
         ) : (
-          <div className=" w-10/12 bg-gray-100  shadow-xl mx-auto flex justify-evenly rounded-lg ">
+          <div className=" w-10/12 bg-[#f0f8ff]  shadow-xl mx-auto flex justify-evenly rounded-lg py-4">
             <div className="flex flex-col w-[50%] ">
               {cartItem.map((item) => (
                 <FoodItem {...item.card.info} key={item.card.info.id} />
               ))}
             </div>
             <div className=" w-[50%] flex justify-center">
-              <div className=" w-[35%] mt-20 font-medium ">
+              <div className=" w-[35%] mt-20 font-medium  ">
                 <h1 className=" text-3xl my-4">Orders Details</h1>
                 <p>Total Quantity:- {cartItem.length}</p>
                 <p>Discount: - </p>
                 <hr className=" my-4 h-1 bg-black" />
                 <p className=" my-4 font-bold  text-xl">Total :{total / 100}</p>
                 <div>
-                  <button className=" bg-red-500 p-4 rounded-xl text-white font-medium hover:bg-red-600">
-                    Check Out
+                  <button
+                    className="bg-red-500 p-4 rounded-xl text-white font-medium hover:bg-red-600"
+                    onClick={() => checkOutHandler()}
+                  >
+                    Place Order
                   </button>
                 </div>
               </div>

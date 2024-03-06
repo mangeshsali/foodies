@@ -46,7 +46,7 @@ const ResturantDetails = () => {
           />
         </div>
       </div>
-      <div className="  w-6/12 bg-[#ebf3fa]  m-auto text-center p-4 rounded-lg shadow-lg">
+      <div className="  w-6/12 bg-[#f0f8ff]  m-auto text-center p-4 rounded-lg shadow-lg">
         <h1 className="text-3xl font-bold">Menu</h1>
         <div>
           {menuItem?.map((menu) => (
