@@ -42,7 +42,7 @@ const FoodItem = ({ name, price, description, defaultPrice, imageId, id }) => {
                 >
                   +
                 </button>
-                <span className=" w-full text-center border-x-2">{}</span>
+                <span className=" w-full text-center border-x-2">{0}</span>
                 <button
                   className=" w-full"
                   onClick={() => qualityDecreaseHandler()}
