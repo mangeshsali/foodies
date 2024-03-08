@@ -5,6 +5,7 @@ const cartSlice = createSlice({
   initialState: {
     items: [],
     cartTotalAmount: 0,
+    quantity: 0,
   },
   reducers: {
     addItem: (state, action) => {
@@ -33,10 +34,21 @@ const cartSlice = createSlice({
       );
     },
     qualityIncrease: (state, action) => {
-      state.items.push(action.payload);
-      state.cartTotalAmount += action.payload.card.info.price;
+      if (state.cartTotalAmount < 0) {
+        state.items = [];
+      } else {
+        state.cartTotalAmount += action.payload;
+        state.quantity = +1;
+      }
     },
-    qualityDecrease: (state, action) => {},
+    qualityDecrease: (state, action) => {
+      if (state.cartTotalAmount <= 0) {
+        state.items = [];
+      } else {
+        state.cartTotalAmount -= action.payload;
+        state.quantity = -1;
+      }
+    },
   },
 });
 

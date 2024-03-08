@@ -6,6 +6,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
 import imgLogo from "../Utils/shopping-cart-orange.svg";
+import DetailCart from "./DetailCart";
 const Cart = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -21,16 +22,10 @@ const Cart = () => {
   const total = useSelector((store) => store.cart.cartTotalAmount);
   console.log(total);
 
-  const [totalAmount, setTotalAmount] = useState("");
   useEffect(() => {
     dispatch(getTotalAmount());
   }, [cartItem]);
 
-  function checkOutHandler() {
-    navigate("/Body");
-    toast.success(" 😄 Order place... Enjoy Your Meal");
-    dispatch(clearItem());
-  }
   return (
     <>
       <div className=" min-h-screen">
@@ -69,23 +64,7 @@ const Cart = () => {
                 <FoodItem {...item.card.info} key={item.card.info.id} />
               ))}
             </div>
-            <div className=" w-[50%] flex justify-center">
-              <div className=" w-[35%] mt-20 font-medium  ">
-                <h1 className=" text-3xl my-4">Orders Details</h1>
-                <p>Total Quantity:- {cartItem.length}</p>
-                <p>Discount: - </p>
-                <hr className=" my-4 h-1 bg-black" />
-                <p className=" my-4 font-bold  text-xl">Total :{total / 100}</p>
-                <div>
-                  <button
-                    className="bg-red-500 p-4 rounded-xl text-white font-medium hover:bg-red-600"
-                    onClick={() => checkOutHandler()}
-                  >
-                    Place Order
-                  </button>
-                </div>
-              </div>
-            </div>
+            <DetailCart />
           </div>
         )}
       </div>
