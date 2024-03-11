@@ -33,8 +33,6 @@ return (
       />
           <Outlet />
 
-          <Footer />
-
         </Provider>
    
   

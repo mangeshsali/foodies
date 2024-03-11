@@ -19,8 +19,6 @@ const Cart = () => {
   }
   const cartItem = useSelector((store) => store.cart.items);
   console.log(cartItem);
-  const total = useSelector((store) => store.cart.cartTotalAmount);
-  console.log(total);
 
   useEffect(() => {
     dispatch(getTotalAmount());
@@ -58,12 +56,13 @@ const Cart = () => {
             </button>
           </div>
         ) : (
-          <div className=" w-10/12 bg-[#f0f8ff]  shadow-xl mx-auto flex justify-evenly rounded-lg py-4">
+          <div className=" w-10/12 bg-[#f0f8ff]  shadow-xl mx-auto  justify-evenly rounded-lg py-4 flex lg:flex-row flex-col">
             <div className="flex flex-col w-[50%] ">
-              {cartItem.map((item) => (
-                <FoodItem {...item.card.info} key={item.card.info.id} />
+              {cartItem.map((item, index) => (
+                <FoodItem item={item} key={item.card.info.id} index={index} />
               ))}
             </div>
+
             <DetailCart />
           </div>
         )}
