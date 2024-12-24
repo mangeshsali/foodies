@@ -1,8 +1,14 @@
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { RESTAURANT_LIST } from "../config";
 
 const useResturantData = () => {
   const [allResturant, setallResturant] = useState([]);
   const [filterResturants, setfilterResturant] = useState([]);
+
+  const locationLat = useSelector((state) => state.locationDetail.lat);
+  const locationLng = useSelector((state) => state.locationDetail.lng);
+
   const [searchText, setSearch] = useState("");
   function filterData(searchText, allResturant) {
     const fdata = allResturant.filter((rest) => {
@@ -13,21 +19,27 @@ const useResturantData = () => {
 
   useEffect(() => {
     getResturant();
-  }, []);
+  }, [locationLat, locationLng]);
 
   async function getResturant() {
     const res = await fetch(
-      "https://corsproxy.org/?https%3A%2F%2Fwww.swiggy.com%2Fdapi%2Frestaurants%2Flist%2Fv5%3Flat%3D18.5204303%26lng%3D73.8567437%26is-seo-homepage-enabled%3Dtrue%26page_type%3DDESKTOP_WEB_LISTING"
+      `${RESTAURANT_LIST}lat=${locationLat}&lng=${locationLng}`
     );
+
+    console.log(`${RESTAURANT_LIST}lat=${locationLat}&lng=${locationLng}`);
     const js = await res.json();
-    setallResturant(
-      js.data.cards[4].card.card.gridElements.infoWithStyle.restaurants
-    );
-    setfilterResturant(
-      js.data.cards[4].card.card.gridElements.infoWithStyle.restaurants
-    );
-    console.log(allResturant);
+
+    const restaurants =
+      js.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+
+    if (restaurants) {
+      setallResturant(restaurants);
+      setfilterResturant(restaurants);
+    } else {
+      console.error("Restaurants data not found");
+    }
   }
+
   return {
     filterData,
     searchText,

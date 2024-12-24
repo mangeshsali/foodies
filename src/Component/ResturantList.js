@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { IMG_CDN } from "../config";
+import { IMG_CDN, IMG_NOTFOOD } from "../config";
 import { addItem } from "../Utils/cartSlice";
 import { configureStore } from "@reduxjs/toolkit";
 
@@ -27,15 +27,15 @@ const ResturantList = ({ item }) => {
               </h2>
               <p className=" text-sm">{men.card.info.description}</p>
             </div>
-            <div className="relative w-[15%]">
+            <div className="relative w-[140px] h-[120px] border">
               <img
                 alt="img"
-                src={IMG_CDN + men.card.info.imageId}
-                className="mx-4 rounded-lg"
+                src={IMG_CDN + men.card.info.imageId || IMG_NOTFOOD}
+                className=" rounded-lg w-full h-full object-cover"
               />
-              <div className=" ">
+              <div className="absolute -bottom-3 left-0 w-full flex justify-center">
                 <button
-                  className=" bg-black text-white p-1 rounded-lg"
+                  className="text-green-500 font-bold bg-white border shadow-sm py-2  px-5 rounded-lg"
                   onClick={() => handlerADD(men)}
                 >
                   ADD +
