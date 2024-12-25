@@ -18,7 +18,6 @@ const Cart = () => {
     navigate("/Body");
   }
   const cartItem = useSelector((store) => store.cart.items);
-  console.log(cartItem);
 
   useEffect(() => {
     dispatch(getTotalAmount());
@@ -26,19 +25,19 @@ const Cart = () => {
 
   return (
     <>
-      <div className=" min-h-screen">
-        <div className="w-10/12 m-auto my-4">
+      <div className=" min-h-screen w-[85%] mx-auto mt-20">
+        {/* <div className="w-10/12 m-auto my-4">
           <h1 className=" text-3xl font-medium">Carts :- {cartItem.length}</h1>
 
           <button
             className=" bg-red-500 hover:bg-red-600 text-white rounded-lg p-2 text-lg m-2"
             onClick={() => clearHandler()}
           >
-            Clear
+            Clear ALL
           </button>
-        </div>
+        </div> */}
         {cartItem.length === 0 ? (
-          <div className="  w-10/12 bg-[#f0f8ff] shadow-xl rounded-xl mx-auto text-2xl  text-center p-8">
+          <div className=" bg-[#f0f8ff] shadow-xl rounded-xl mx-auto text-2xl  text-center">
             <div className="flex justify-center">
               <img alt="img" src={imgLogo} className=" w-56 m-4"></img>
             </div>
@@ -56,14 +55,16 @@ const Cart = () => {
             </button>
           </div>
         ) : (
-          <div className=" w-10/12 bg-[#f0f8ff]  shadow-xl mx-auto  justify-evenly rounded-lg py-4 flex lg:flex-row flex-col">
-            <div className="flex flex-col w-[50%] ">
+          <div className="p-10 gap-10 bg-[#f0f8ff]  shadow-xl mx-auto  justify-evenly rounded-lg  flex lg:flex-row flex-col">
+            <div className="flex flex-col  w-[60%] gap-3">
               {cartItem.map((item, index) => (
                 <FoodItem item={item} key={item.card.info.id} index={index} />
               ))}
             </div>
 
-            <DetailCart />
+            <div className="w-[40%]">
+              <DetailCart />
+            </div>
           </div>
         )}
       </div>

@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+import { FaMinus, FaPlus } from "react-icons/fa";
 import { IMG_CDN } from "../config";
 import {
   removeItem,
@@ -8,60 +9,79 @@ import {
 } from "../Utils/cartSlice";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
+
 const FoodItem = ({ item, index }) => {
   const { card, quantity } = item;
   const { info } = card;
   const { name, price, defaultPrice, description, imageId, id } = info;
   const dispatch = useDispatch();
+
   function removeHandler({ id }) {
     dispatch(removeItem({ id }));
     toast.success("Remove from Cart");
   }
 
   return (
-    <>
-      {" "}
-      <div className=" w-6/12 bg-gray-100 mb-4 rounded-lg text-xl m-auto text-center  shadow-lg">
-        <div className="flex p-2 m-2  justify-between items-center ">
-          <div className="relative w-[50%]">
-            <img alt="img" src={IMG_CDN + imageId} className=" rounded-lg" />
-          </div>
+    <div className="w-full h-[160px] gap-6 border bg-white   p-2 rounded-lg text-xl  shadow-lg flex ">
+      {/* Image */}
+      <div className="w-[15%]   flex flex-col justify-between">
+        <img
+          alt="img"
+          src={IMG_CDN + imageId}
+          className=" rounded-md w-full h-[65%] object-cover"
+        />
 
-          <div className=" m-2 w-[50%]">
-            <div className=" text-start ">
-              <h1 className=" font-medium text-lg">{name}</h1>
-              <h2 className=" text-lg">
-                {"₹ "}
-                {price ? price / 100 : defaultPrice / 100}
-              </h2>
-              <div className=" flex  justify-between m-2 w-full border-[2px] rounded-sm">
-                <button
-                  className=" w-full"
-                  onClick={() => dispatch(quantityIncrease(index))}
-                >
-                  +
-                </button>
-                <span className=" w-full text-center border-x-2">
-                  {quantity}
-                </span>
-                <button
-                  className=" w-full"
-                  onClick={() => dispatch(qualityDecrease(index))}
-                >
-                  -
-                </button>
-              </div>
-              <button
-                className=" bg-red-500 rounded-md w-full p-2 text-sm text-white  hover:bg-red-600 font-medium"
-                onClick={() => removeHandler({ id })}
-              >
-                Remove Cart
-              </button>
-            </div>
-          </div>
+        {/* Quantity Control */}
+
+        <div className="flex justify-between border border-slate-900 rounded-lg overflow-hidden">
+          <button
+            className="px-3 py-1 bg-slate-900  text-white"
+            onClick={() => dispatch(qualityDecrease(index))}
+          >
+            <FaMinus className="text-[10px]" />
+          </button>
+
+          <button className="px-3 py-1" disabled={true}>
+            {quantity}
+          </button>
+
+          <button
+            className="px-3 py-1 bg-slate-900  text-white"
+            onClick={() => dispatch(quantityIncrease(index))}
+          >
+            <FaPlus className="text-[12px]" />
+          </button>
         </div>
       </div>
-    </>
+
+      {/* Info Section */}
+      <div className=" flex flex-col justify-between">
+        {/* Item Info */}
+        <div>
+          <h1 className="font-medium text-lg">{name}</h1>
+          <h2 className="text-lg">
+            {"₹ "}
+            {price ? price / 100 : defaultPrice / 100}
+          </h2>
+          <p className="text-sm text-gray-500">
+            {description.length > 170
+              ? description.slice(0, 170) + "..."
+              : description}
+          </p>
+        </div>
+
+        {/* Remove Button */}
+        <div className="block">
+          <button
+            className="bg-red-500 rounded-md  p-2 text-xs text-white hover:bg-red-600 font-medium mt-2"
+            onClick={() => removeHandler({ id })}
+          >
+            Remove from Cart
+          </button>
+        </div>
+      </div>
+    </div>
   );
 };
+
 export default FoodItem;

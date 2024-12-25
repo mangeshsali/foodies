@@ -17,7 +17,6 @@ const useResturant = (id) => {
       `${URL_MENU}lat=${locationLat}&lng=${locationLng}&restaurantId=${id}`
     );
     const js = await res.json();
-    console.log(js);
 
     const itemDetailFilter = js?.data?.cards.filter(
       (ele) =>
@@ -27,16 +26,13 @@ const useResturant = (id) => {
 
     setitemDetail(itemDetailFilter[0]?.card?.card?.info);
 
-    console.log(js?.data?.cards[2]?.card.card.info);
     setMenuitem(
-      js?.data?.cards[5]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.filter(
+      js?.data?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.filter(
         (c) =>
           c.card?.card["@type"] ==
           "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
       )
     );
-    console.log("menuItem", menuItem);
-    console.log(itemDetail);
   }
   return {
     menuItem,

@@ -8,7 +8,7 @@ const ResturantCategory = ({ data, isVisible, onClick }) => {
         className="w-full flex justify-between p-2 my-2 font-bold text-md cursor-pointer"
         onClick={onClick}
       >
-        <span>
+        <span className=" text-lg font-bold">
           {data.title} ({data.itemCards.length})
         </span>
         <div className="text-3xl">

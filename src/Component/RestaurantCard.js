@@ -1,5 +1,6 @@
 import React from "react";
 import { IMG_CDN, IMG_NOTFOOD } from "../config";
+import { FaRegClock } from "react-icons/fa";
 
 const RestaurantCard = ({
   name,
@@ -8,11 +9,12 @@ const RestaurantCard = ({
   avgRating,
   locality,
   costForTwo,
+  sla,
 }) => {
   return (
-    <div className="rounded-lg shadow-lg w-[310px] bg-white overflow-hidden transform hover:scale-105 transition-transform duration-300 ease-in-out">
+    <div className="rounded-lg flex flex-col justify-between shadow-lg w-[310px] h-[300px] bg-white overflow-hidden transform hover:scale-105 transition-transform duration-300 ease-in-out">
       <img
-        className="w-full h-[150px] object-cover"
+        className="w-full h-[55%] object-cover"
         alt={name}
         src={IMG_CDN + cloudinaryImageId || IMG_NOTFOOD}
       />
@@ -32,7 +34,13 @@ const RestaurantCard = ({
           >
             <span className="text-sm font-medium">⭐ {avgRating}</span>
           </div>
-          <p className="text-sm text-gray-600">{costForTwo}</p>
+          <div className="flex items-center gap-1">
+            <FaRegClock className="text-gray-500 text-base" />
+            <p className="text-gray-500 font-medium text-base">
+              {sla.slaString}
+            </p>
+          </div>
+          <p className="text-base text-gray-700 font-medium">{costForTwo}</p>
         </div>
       </div>
     </div>

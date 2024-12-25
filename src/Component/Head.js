@@ -71,20 +71,22 @@ function Head() {
           </div>
 
           {/* Location */}
-          <div
-            className="flex justify-center items-center gap-2"
-            onClick={SideBarHandler}
-          >
-            <p className=" text-black underline underline-offset-2 text-sm font-bold">
-              Other
-            </p>
-            <h1 className=" text-gray-500 flex gap-3 items-center text-sm">
-              {Address.slice(0, 20)}
-              <span>
-                <FaAngleDown className="text-[#ef4444] text-2xl" />
-              </span>
-            </h1>
-          </div>
+          {nav && (
+            <div
+              className="flex justify-center items-center gap-2"
+              onClick={SideBarHandler}
+            >
+              <p className=" text-black underline underline-offset-2 text-sm font-bold">
+                Other
+              </p>
+              <h1 className=" text-gray-500 flex gap-3 items-center text-sm">
+                {Address.slice(0, 20)}
+                <span>
+                  <FaAngleDown className="text-[#ef4444] text-2xl" />
+                </span>
+              </h1>
+            </div>
+          )}
 
           {sideBar && <SidebarLocation Handler={SideBarHandler} />}
 

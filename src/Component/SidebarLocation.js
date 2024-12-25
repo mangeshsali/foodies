@@ -8,14 +8,17 @@ import {
   addLng,
   addLocation,
 } from "../Utils/LocationSlice";
+import { useNavigate } from "react-router-dom";
+import { clearItem } from "../Utils/cartSlice";
 
 const SidebarLocation = ({ Handler }) => {
   const [query, setQuery] = useState("");
   const [LocationData, setLocationData] = useState(null);
   const [debounceTimeout, setDebounceTimeout] = useState(null);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const locationID = useSelector((state) => state.locationDetail.locationId);
-  console.log("ID", locationID);
+
 
   const onChangeHandler = (e) => {
     const { value } = e.target;
@@ -34,9 +37,11 @@ const SidebarLocation = ({ Handler }) => {
   };
 
   const PassDataHandler = (data) => {
+    navigate("/body");
     dispatch(addLocation(data?.place_id));
     dispatch(addAddress(data?.structured_formatting.main_text));
     SetLatAndLong(data?.place_id);
+    dispatch(clearItem());
     Handler();
   };
 

@@ -5,11 +5,13 @@ import { RESTAURANT_LIST } from "../config";
 const useResturantData = () => {
   const [allResturant, setallResturant] = useState([]);
   const [filterResturants, setfilterResturant] = useState([]);
+  const [orginalData, setOriginalData] = useState([]);
 
   const locationLat = useSelector((state) => state.locationDetail.lat);
   const locationLng = useSelector((state) => state.locationDetail.lng);
 
   const [searchText, setSearch] = useState("");
+
   function filterData(searchText, allResturant) {
     const fdata = allResturant.filter((rest) => {
       return rest.info.name.toLowerCase().includes(searchText.toLowerCase());
@@ -19,18 +21,21 @@ const useResturantData = () => {
 
   useEffect(() => {
     getResturant();
+
   }, [locationLat, locationLng]);
 
   async function getResturant() {
+
     const res = await fetch(
       `${RESTAURANT_LIST}lat=${locationLat}&lng=${locationLng}`
     );
 
-    console.log(`${RESTAURANT_LIST}lat=${locationLat}&lng=${locationLng}`);
     const js = await res.json();
+    setOriginalData(js?.data);
 
     const restaurants =
-      js.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+      js.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+
 
     if (restaurants) {
       setallResturant(restaurants);
@@ -48,6 +53,7 @@ const useResturantData = () => {
     allResturant,
     setallResturant,
     setfilterResturant,
+    orginalData,
   };
 };
 

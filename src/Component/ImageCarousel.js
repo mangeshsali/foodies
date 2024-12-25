@@ -40,10 +40,12 @@ const ImageCarousel = () => {
   const visibleImages = images.slice(startIndex, startIndex + 8);
 
   return (
-    <div className="flex flex-col items-center  w-[85%] mx-auto">
-      <div className="mt-4 flex gap-4  items-center justify-between w-full px-4 my-4">
+    <div className="flex flex-col items-center  w-[85%] mx-auto  py-8">
+      <div className=" flex gap-4  items-center justify-between w-full px-4 ">
         <div>
-          <h1 className="font-bold text-3xl">What's on your mind?</h1>
+          <h1 className="font-bold text-[30px] font-DM">
+            What's on your mind?
+          </h1>
         </div>
         <div className="flex gap-3">
           <button
@@ -61,7 +63,7 @@ const ImageCarousel = () => {
         </div>
       </div>
 
-      <div className="overflow-hidden flex gap-2 mt-4 w-full ">
+      <div className="overflow-hidden flex gap-2  w-full ">
         {visibleImages.map((image, index) => (
           <img
             key={index}

@@ -7,6 +7,10 @@ module.exports = {
       backgroundImag: {
         "hero-pattern": "url('./src/bg-login.jpeg')",
       },
+      fontFamily: {
+        grotesque: ["Darker Grotesque", "serif"],
+        DM: ["DM Sans", "serif"],
+      },
     },
   },
   plugins: [],

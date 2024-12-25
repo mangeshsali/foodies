@@ -17,11 +17,11 @@ const DetailCart = () => {
   }
 
   return (
-    <div className=" w-[50%] flex justify-center ">
-      <div className=" w-[35%] mt-20 font-medium ">
-        <h1 className=" text-3xl my-4">Orders Details</h1>
+    <div className=" w-full flex justify-center  ">
+      <div className="mt-20 ">
+        <h1 className=" text-3xl ">Orders Details</h1>
         <p>Total Quantity:- {cartItem}</p>
-        <p>Discount: - </p>
+        <p>Discount: - 0</p>
         <hr className=" my-4 h-1 bg-black" />
         <p className=" my-4 font-bold  text-xl">Total :{total}</p>
         <div>

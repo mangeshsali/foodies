@@ -17,15 +17,17 @@ const ResturantList = ({ item }) => {
       {item.map((men) => (
         <>
           <div className="flex p-2 m-2  justify-between" key={men.card.info.id}>
-            <div className=" text-start w-[85%]">
-              <h1 className=" font-medium">{men.card.info.name}</h1>
-              <h2>
+            <div className=" text-start w-[85%] flex flex-col gap-3">
+              <h1 className=" text-base font-medium">{men.card.info.name}</h1>
+              <h2 className=" text-base">
                 {"₹ "}
                 {men.card.info.price
                   ? men.card.info.price / 100
                   : men.card.info.defaultPrice / 100}
               </h2>
-              <p className=" text-sm">{men.card.info.description}</p>
+              <p className=" text-sm  text-gray-500">
+                {men.card.info.description}
+              </p>
             </div>
             <div className="relative w-[140px] h-[120px] border">
               <img
