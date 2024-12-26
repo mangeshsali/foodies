@@ -64,8 +64,8 @@ const FoodItem = ({ item, index }) => {
             {price ? price / 100 : defaultPrice / 100}
           </h2>
           <p className="text-sm text-gray-500">
-            {description.length > 170
-              ? description.slice(0, 170) + "..."
+            {description?.length > 170
+              ? description?.slice(0, 170) + "..."
               : description}
           </p>
         </div>
